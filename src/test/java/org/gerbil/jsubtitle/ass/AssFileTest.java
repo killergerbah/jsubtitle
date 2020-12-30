@@ -71,4 +71,20 @@ class AssFileTest {
         assertEquals("", event.getEffect());
         assertEquals("{\\an1\\fs35\\fad(300,300)}ただ一人　迷い込む", event.getText());
     }
+
+    @Test
+    void parses2() throws IOException {
+        var assFile = AssFile.read(getClass().getClassLoader().getResourceAsStream("testsubs2.ass"));
+        var scriptInfo = assFile.getScriptInfoSection();
+
+        assertNotNull(scriptInfo);
+        assertEquals("Kyojin S2-01", scriptInfo.getTitle());
+        assertEquals("诸神字幕组", scriptInfo.getOriginalScript());
+        assertNull(scriptInfo.getSynchPoint());
+        assertEquals("v4.00+", scriptInfo.getScriptType());
+        assertNull(scriptInfo.getCollisions());
+        assertEquals(1920, scriptInfo.getPlayResX());
+        assertEquals(1080, scriptInfo.getPlayResY());
+        assertEquals(0, scriptInfo.getTimer());
+    }
 }

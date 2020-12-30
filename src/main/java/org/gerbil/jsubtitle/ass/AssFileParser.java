@@ -8,8 +8,11 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.BiConsumer;
+import java.util.regex.Pattern;
 
 final class AssFileParser {
+
+    private static final Pattern GARBAGE_SECTION_PATTERN = Pattern.compile("\\[.+\\]");
 
     private final List<AssFileSection> sections = new ArrayList<>();
 
@@ -54,6 +57,10 @@ final class AssFileParser {
             return new EventSectionParser();
         }
 
+        if (GARBAGE_SECTION_PATTERN.matcher(trimmed).matches()) {
+            return new GarbageSectionParser();
+        }
+
         throw new AssParseException("Unrecognized section at line " + lineNumber + ":\n" + line);
     }
 
@@ -74,6 +81,14 @@ final class AssFileParser {
         @Override
         public boolean consume(String line) {
             return "".equals(line.trim());
+        }
+    }
+
+    private static final class GarbageSectionParser implements AssFileSectionParser, AssFileSection {
+
+        @Override
+        public boolean consume(String line) {
+            return line.split(":").length == 2;
         }
     }
 
@@ -133,7 +148,7 @@ final class AssFileParser {
             var mutator = MUTATORS.get(field);
 
             if (mutator != null) {
-                mutator.accept(this, value);
+                mutator.accept(this, value.trim());
             }
 
             return true;
