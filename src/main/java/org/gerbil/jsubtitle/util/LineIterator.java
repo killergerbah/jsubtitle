@@ -1,4 +1,4 @@
-package org.gerbil.jsubtitle.ass;
+package org.gerbil.jsubtitle.util;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-final class LineIterator implements AutoCloseable {
+public final class LineIterator implements AutoCloseable {
 
     private final BufferedReader reader;
 
@@ -15,15 +15,15 @@ final class LineIterator implements AutoCloseable {
         reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
     }
 
-    static LineIterator from(InputStream inputStream) {
+    public static LineIterator from(InputStream inputStream) {
         return new LineIterator(inputStream);
     }
 
-    static LineIterator from(byte[] bytes) {
+    public static LineIterator from(byte[] bytes) {
         return new LineIterator(new ByteArrayInputStream(bytes));
     }
 
-    static LineIterator from(String string) {
+    public static LineIterator from(String string) {
         return new LineIterator(new ByteArrayInputStream(string.getBytes()));
     }
 
@@ -32,11 +32,11 @@ final class LineIterator implements AutoCloseable {
         reader.close();
     }
 
-    boolean hasNext() throws IOException {
+    public boolean hasNext() throws IOException {
         return reader.ready();
     }
 
-    String next() throws IOException {
+    public String next() throws IOException {
         return reader.readLine().replace("\uFEFF", "");
     }
 }

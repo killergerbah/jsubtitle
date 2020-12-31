@@ -1,5 +1,7 @@
 package org.gerbil.jsubtitle.ass;
 
+import org.gerbil.jsubtitle.util.LineIterator;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
