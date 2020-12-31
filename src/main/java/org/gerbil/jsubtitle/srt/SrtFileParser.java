@@ -2,7 +2,6 @@ package org.gerbil.jsubtitle.srt;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 final class SrtFileParser {
 
@@ -62,81 +61,10 @@ final class SrtFileParser {
                 throw new IllegalArgumentException("Improperly formatted timestamps: " + line);
             }
 
-            subtitle.start = parse(timestampStrings[0]);
-            subtitle.end = parse(timestampStrings[1]);
+            subtitle.start = Parse.timestamp(timestampStrings[0]);
+            subtitle.end = Parse.timestamp(timestampStrings[1]);
 
             return new TextState(subtitle);
-        }
-
-        private long parse(String timestampString) {
-            var tokenBuilder = new StringBuilder();
-            var unit = Unit.HOURS;
-            long timestamp = 0;
-            var iterator = timestampString.chars().iterator();
-
-            while (iterator.hasNext()) {
-                int c = iterator.next();
-
-                if (unit.shouldMoveNext(tokenBuilder, c)) {
-                    timestamp += unit.toMilliseconds(tokenBuilder.toString());
-
-                    if (iterator.hasNext()) {
-                        tokenBuilder = new StringBuilder();
-                        unit = unit.next();
-
-                        if (unit == null) {
-                            throw new IllegalArgumentException("Improperly formatted timestamp");
-                        }
-                    }
-                } else {
-                    tokenBuilder.append((char) c);
-                }
-            }
-
-            timestamp += unit.toMilliseconds(tokenBuilder.toString());
-
-            return timestamp;
-        }
-
-        private enum Unit {
-
-            MILLISECONDS(TimeUnit.MILLISECONDS, null, 3, '\0') {
-                @Override
-                boolean shouldMoveNext(StringBuilder builder, int c) {
-                    return builder.length() == 3;
-                }
-            },
-            SECONDS(TimeUnit.SECONDS, MILLISECONDS, 2, ','),
-            MINUTES(TimeUnit.MILLISECONDS, SECONDS, 2, ':'),
-            HOURS(TimeUnit.HOURS, MINUTES, 2, ':');
-
-            private final TimeUnit timeUnit;
-            private final Unit nextUnit;
-            private final int length;
-            private final char delimiter;
-
-            Unit(TimeUnit timeUnit, Unit nextUnit, int length, char delimiter) {
-                this.timeUnit = timeUnit;
-                this.nextUnit = nextUnit;
-                this.length = length;
-                this.delimiter = delimiter;
-            }
-
-            boolean shouldMoveNext(StringBuilder builder, int c) {
-                return delimiter == (char) c;
-            }
-
-            long toMilliseconds(String token) {
-                if (token.length() != length) {
-                    throw new IllegalArgumentException("Invalid token length in timestamp");
-                }
-
-                return timeUnit.toMillis(Integer.parseInt(token));
-            }
-
-            Unit next() {
-                return nextUnit;
-            }
         }
     }
 

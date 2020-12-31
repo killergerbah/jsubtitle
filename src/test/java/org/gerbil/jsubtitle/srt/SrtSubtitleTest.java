@@ -20,5 +20,11 @@ class SrtSubtitleTest {
         assertEquals(13920, s.getStart());
         assertEquals(18180, s.getEnd());
         assertEquals("（エレン）壁の向こうには海があるとアルミンが言った", s.getText());
+
+        s = subtitles.get(5);
+        assertEquals(6, s.getIndex());
+        assertEquals(131210, s.getStart());
+        assertEquals(133840, s.getEnd());
+        assertEquals("（ジャン）サシャ つまみ食いでもしてみろ", s.getText());
     }
 }
