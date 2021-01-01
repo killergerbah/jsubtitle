@@ -239,7 +239,7 @@ final class AssFileParser {
             MUTATORS = new HashMap<>(25);
             MUTATORS.put("Name", (parser, value) -> parser.name = value);
             MUTATORS.put("Fontname", (parser, value) -> parser.fontName = value);
-            MUTATORS.put("Fontsize", (parser, value) -> parser.fontSize = Integer.parseInt(value));
+            MUTATORS.put("Fontsize", (parser, value) -> parser.fontSize = Double.parseDouble(value));
             MUTATORS.put("PrimaryColour", (parser, value) -> parser.primaryColor = value);
             MUTATORS.put("SecondaryColour", (parser, value) -> parser.secondaryColor = value);
             MUTATORS.put("TertiaryColour", (parser, value) -> parser.outlineColor = value);
@@ -267,7 +267,7 @@ final class AssFileParser {
         private String[] format;
         private String name;
         private String fontName;
-        private int fontSize;
+        private double fontSize;
         private String primaryColor;
         private String secondaryColor;
         private String outlineColor;
@@ -335,7 +335,7 @@ final class AssFileParser {
         }
 
         @Override
-        public int getFontSize() {
+        public double getFontSize() {
             return fontSize;
         }
 

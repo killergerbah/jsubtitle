@@ -6,7 +6,7 @@ public interface StyleSection extends AssFileSection {
 
     String getFontName();
 
-    int getFontSize();
+    double getFontSize();
 
     String getPrimaryColor();
 

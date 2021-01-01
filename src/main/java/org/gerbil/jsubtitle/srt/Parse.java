@@ -19,7 +19,7 @@ final class Parse {
                 if (iterator.hasNext()) {
                     tokenBuilder = new StringBuilder();
                     unit = unit.next();
-                    
+
                     if (unit == null) {
                         throw new IllegalArgumentException("Improperly formatted timestamp");
                     }
