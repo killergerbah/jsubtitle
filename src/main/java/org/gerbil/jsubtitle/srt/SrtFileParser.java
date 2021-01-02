@@ -12,7 +12,7 @@ final class SrtFileParser {
         var oldState = state;
         state = state.consume(line);
 
-        if (state instanceof IndexState) {
+        if (state instanceof IndexState && oldState instanceof TextState) {
             subtitles.add(((TextState) oldState).subtitle);
         }
     }
