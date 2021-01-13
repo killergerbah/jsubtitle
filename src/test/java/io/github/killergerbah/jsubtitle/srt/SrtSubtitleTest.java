@@ -1,4 +1,4 @@
-package org.gerbil.jsubtitle.srt;
+package io.github.killergerbah.jsubtitle.srt;
 
 import org.junit.jupiter.api.Test;
 

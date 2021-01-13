@@ -1,4 +1,4 @@
-package org.gerbil.jsubtitle.srt;
+package io.github.killergerbah.jsubtitle.srt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ final class SrtFileParser {
 
         @Override
         public State consume(String line) {
-            var timestampStrings = line.split(" --> ");
+            var timestampStrings = line.trim().split(" --> ");
 
             if (timestampStrings.length != 2) {
                 throw new IllegalArgumentException("Improperly formatted timestamps: " + line);

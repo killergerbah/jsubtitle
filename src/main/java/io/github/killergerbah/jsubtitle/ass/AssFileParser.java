@@ -1,6 +1,5 @@
-package org.gerbil.jsubtitle.ass;
+package io.github.killergerbah.jsubtitle.ass;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

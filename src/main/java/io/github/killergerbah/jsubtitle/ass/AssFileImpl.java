@@ -1,4 +1,4 @@
-package org.gerbil.jsubtitle.ass;
+package io.github.killergerbah.jsubtitle.ass;
 
 final class AssFileImpl implements AssFile {
 

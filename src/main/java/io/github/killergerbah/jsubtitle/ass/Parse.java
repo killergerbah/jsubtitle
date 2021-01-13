@@ -1,4 +1,4 @@
-package org.gerbil.jsubtitle.ass;
+package io.github.killergerbah.jsubtitle.ass;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

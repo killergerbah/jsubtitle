@@ -1,4 +1,4 @@
-package org.gerbil.jsubtitle.srt;
+package io.github.killergerbah.jsubtitle.srt;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +21,7 @@ final class Parse {
                     unit = unit.next();
 
                     if (unit == null) {
-                        throw new IllegalArgumentException("Improperly formatted timestamp");
+                        throw new IllegalArgumentException("Improperly formatted timestamp: " + timestampString);
                     }
                 }
             } else {

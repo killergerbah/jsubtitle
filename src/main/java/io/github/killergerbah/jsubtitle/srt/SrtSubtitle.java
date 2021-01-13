@@ -1,6 +1,6 @@
-package org.gerbil.jsubtitle.srt;
+package io.github.killergerbah.jsubtitle.srt;
 
-import org.gerbil.jsubtitle.util.LineIterator;
+import io.github.killergerbah.jsubtitle.util.LineIterator;
 
 import java.io.File;
 import java.io.FileInputStream;

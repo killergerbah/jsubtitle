@@ -1,4 +1,4 @@
-package org.gerbil.jsubtitle.util;
+package io.github.killergerbah.jsubtitle.util;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
